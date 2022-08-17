@@ -33,7 +33,7 @@ class Trader:
         """
 
         with self.database.db_session() as session:
-            print(session.query(Pair))
+            print(session.query(Pair)).all()
             for pair in session.query(Pair).filter(Pair.ratio.is_(None)).all():
                 if pair.from_coin.symbol == pair.to_coin.symbol:
                     continue
