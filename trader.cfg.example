@@ -1,0 +1,39 @@
+# All config params are explained in depth in the README.
+
+[binance]
+
+# API key and Secret key created on Binance
+binance_api_key=
+binance_api_secret=
+
+# `com` or `us`, depending on your region
+binance_tld=com
+
+# Number of reconnection attempts when unexpectedly disconnected from the Binance API
+binance_retries=0
+
+[trader]
+
+# Bridge coin of your choice
+fiat_symbol=USDT
+
+# Targetted coin that will be trader against the FIAT coin
+coin_symbol=BTC
+
+# Coin used for display and reporting
+repr_coin=EUR
+
+# Controls how many seconds the bot should wait between
+# analyzing the current prices
+sleep_time=1
+
+# Minimum positive change in percentage of price before selling positions
+min_profit=0.2
+
+# Maximum negative change in percentage of price before selling positions (stop loss)
+max_loss=5.0
+
+[notifications]
+
+# Webhook URL for Discord notifications
+discord_webhook_url=
