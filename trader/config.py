@@ -28,9 +28,9 @@ class Config:
             "max_loss": 5.0,
         }
 
-        try:
+        if os.path.exists(CONFIG_FILE_PATH):
             config.read(CONFIG_FILE_PATH)
-        except Exception:
+        else:
             print(
                 f"Configuration file not found ({CONFIG_FILE_NAME}), "
                 f"assuming default configuration..."
