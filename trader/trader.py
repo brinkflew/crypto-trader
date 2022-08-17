@@ -34,22 +34,19 @@ class Trader:
 
         with self.database.db_session() as session:
             for pair in session.query(Pair).filter(Pair.ratio.is_(None)).all():
-                print(str(pair))
                 if pair.from_coin.symbol == pair.to_coin.symbol:
                     continue
 
                 if not pair.from_coin.enabled or not pair.to_coin.enabled:
                     continue
 
-                logger.info(f"Initializing pair {term.yellow_bold(str(pair))}")
+                logger.over(f"Initializing pair {term.yellow_bold(str(pair))}")
 
-                from_coin_price = self.manager.get_ticker_price(pair.from_coin + self.config.FIAT_SYMBOL)
-                if from_coin_price is None:
+                pair_price = self.manager.get_ticker_price(str(pair))
+                if pair_price is None:
                     continue
 
-                to_coin_price = self.manager.get_ticker_price(pair.to_coin + self.config.FIAT_SYMBOL)
-                if to_coin_price is None:
-                    continue
+                import pdb; pdb.set_trace()
 
                 pair.ratio = from_coin_price / to_coin_price
                 logger.info(f"Initialized pair {term.yellow_bold(str(pair))}")
