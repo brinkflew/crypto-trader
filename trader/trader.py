@@ -33,6 +33,7 @@ class Trader:
         """
 
         with self.database.db_session() as session:
+            print(session.query(Pair))
             for pair in session.query(Pair).filter(Pair.ratio.is_(None)).all():
                 if pair.from_coin.symbol == pair.to_coin.symbol:
                     continue
@@ -42,20 +43,20 @@ class Trader:
 
                 logger.info(f"Initializing pair {term.yellow_bold(str(pair))}")
 
-                import ipdb; ipdb.set_trace()
-
-                from_coin_price = self.manager.get_ticker_price(pair.from_coin + self.config.FIAT_SYMBOL)
+                from_pair = pair.from_coin + self.config.FIAT_SYMBOL
+                from_coin_price = self.manager.get_ticker_price(from_pair)
                 if from_coin_price is None:
                     logger.warning(
-                        f"{term.yellow_bold(pair.from_coin.symbol)} symbol not found, "
+                        f"{term.yellow_bold(from_pair)} symbol not found, "
                         f"skipping initialization"
                     )
                     continue
 
-                to_coin_price = self.manager.get_ticker_price(pair.to_coin + self.config.FIAT_SYMBOL)
+                to_pair = pair.to_coin + self.config.FIAT_SYMBOL
+                to_coin_price = self.manager.get_ticker_price(to_pair)
                 if to_coin_price is None:
                     logger.warning(
-                        f"{term.yellow_bold(pair.to_coin.symbol)} symbol not found, "
+                        f"{term.yellow_bold(to_pair)} symbol not found, "
                         f"skipping initialization"
                     )
                     continue
