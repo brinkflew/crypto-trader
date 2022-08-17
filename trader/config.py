@@ -42,10 +42,10 @@ class Config:
             return os.environ.get(key.upper()) or config.get(CONFIG_SECTION, key.lower())
 
         # Binance config
-        self.BINANCE_API_KEY = get_option("BINANCE_API_KEY")
-        self.BINANCE_API_SECRET = get_option("BINANCE_API_SECRET")
-        self.BINANCE_TLD = get_option("BINANCE_TLD")
-        self.BINANCE_RETRIES = int(get_option("BINANCE_RETRIES"))
+        self.BINANCE_API_KEY = get_option("binance_api_key")
+        self.BINANCE_API_SECRET = get_option("binance_api_secret")
+        self.BINANCE_TLD = get_option("binance_tld")
+        self.BINANCE_RETRIES = int(get_option("binance_retries"))
         self.BINANCE_RETRIES_UNLIMITED = not self.BINANCE_RETRIES
 
         # Coins config
