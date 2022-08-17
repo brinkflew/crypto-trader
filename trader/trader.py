@@ -42,7 +42,7 @@ class Trader:
 
                 logger.over(f"Initializing pair {term.yellow_bold(str(pair))}")
 
-                from_coin_price = self.manager.get_ticker_price(pair.from_coin + self.config.FIAT_COIN)
+                from_coin_price = self.manager.get_ticker_price(pair.from_coin + self.config.FIAT_SYMBOL)
                 if from_coin_price is None:
                     logger.warning(
                         f"{term.yellow_bold(pair.from_coin.symbol)} symbol not found, "
@@ -50,7 +50,7 @@ class Trader:
                     )
                     continue
 
-                to_coin_price = self.manager.get_ticker_price(pair.to_coin + self.config.FIAT_COIN)
+                to_coin_price = self.manager.get_ticker_price(pair.to_coin + self.config.FIAT_SYMBOL)
                 if to_coin_price is None:
                     logger.warning(
                         f"{term.yellow_bold(pair.to_coin.symbol)} symbol not found, "
@@ -86,7 +86,7 @@ class Trader:
                     raise ControlledException("User did not want to switch to an available coin")
 
                 self.logger.info(f"Selling {term.yellow_bold(current_coin_symbol)} to begin trading")
-                self.manager.sell_alt(current_coin, self.config.FIAT_COIN)
+                self.manager.sell_alt(current_coin, self.config.FIAT_SYMBOL)
 
     def initialize_starting_balances(self):
         symbols = {

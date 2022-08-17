@@ -427,7 +427,7 @@ class BinanceManager:
     def collate_coins(self, target_symbol):
         total = .0
         enabled_symbols = {coin.symbol for coin in self.database.get_coins(only_enabled=True)}
-        enabled_symbols.add(self.config.FIAT_COIN)
+        enabled_symbols.add(self.config.FIAT_SYMBOL)
 
         for symbol in enabled_symbols:
             balance = self.get_currency_balance(symbol)
