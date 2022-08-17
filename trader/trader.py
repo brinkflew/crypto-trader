@@ -43,26 +43,16 @@ class Trader:
 
                 logger.info(f"Initializing pair {term.yellow_bold(str(pair))}")
 
-                from_pair = pair.from_coin + self.config.FIAT_SYMBOL
-                from_coin_price = self.manager.get_ticker_price(from_pair)
+                from_coin_price = self.manager.get_ticker_price(pair.from_coin + self.config.FIAT_SYMBOL)
                 if from_coin_price is None:
-                    logger.warning(
-                        f"{term.yellow_bold(from_pair)} symbol not found, "
-                        f"skipping initialization"
-                    )
                     continue
 
-                to_pair = pair.to_coin + self.config.FIAT_SYMBOL
-                to_coin_price = self.manager.get_ticker_price(to_pair)
+                to_coin_price = self.manager.get_ticker_price(pair.to_coin + self.config.FIAT_SYMBOL)
                 if to_coin_price is None:
-                    logger.warning(
-                        f"{term.yellow_bold(to_pair)} symbol not found, "
-                        f"skipping initialization"
-                    )
                     continue
 
                 pair.ratio = from_coin_price / to_coin_price
-                logger.over(f"Initialized pair {term.yellow_bold(str(pair))}")
+                logger.info(f"Initialized pair {term.yellow_bold(str(pair))}")
 
     def initialize_current_coin(self):
         """
